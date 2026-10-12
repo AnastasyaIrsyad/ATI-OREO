@@ -2,4 +2,13 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="palm_green">#274746</color>
+    <color name="palm_gold">#E0AB43</color>
+    <color name="palm_sage">#9DB3AE</color>
+    <color name="palm_mist">#EDF3F1</color>
+    <color name="palm_alert">#B3302F</color>
+    <color name="palm_surface">#FAFCFB</color>
+    <color name="palm_ink">#1F3332</color>
+    <color name="palm_muted">#6B7F7B</color>
+    <color name="palm_gold_dark">#8A5F00</color>
 </resources>
