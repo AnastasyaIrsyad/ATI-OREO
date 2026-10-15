@@ -1,5 +1,4 @@
 <resources>
     <string name="app_name">Palmventory</string>
     <string name="app_tagline">Kelola Inventaris Perkebunan Lebih Cerdas</string>
-    <string name="app_version">Versi 1.0</string>
 </resources>

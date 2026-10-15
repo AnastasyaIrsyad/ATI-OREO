@@ -1,9 +1,98 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.ATIOREO" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <!-- Tema aplikasi: hanya yang dipakai di SEMUA halaman (warna utama, latar, font) -->
+    <style name="Base.Theme.ATIOREO" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/palm_green</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondaryContainer">@color/palm_green</item> <!-- warna lingkaran menu aktif di bottom nav -->
+        <item name="android:windowBackground">@color/palm_surface</item>
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="fontFamily">@font/poppins</item>
     </style>
 
     <style name="Theme.ATIOREO" parent="Base.Theme.ATIOREO" />
+
+    <!-- Toolbar -->
+    <style name="Palm.ToolbarTitle" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">@font/poppinsbold</item>
+    </style>
+
+    <!-- Teks -->
+    <style name="Palm.Label" parent="">
+        <item name="android:textColor">@color/palm_green</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:fontFamily">@font/poppinssemibold</item>
+    </style>
+
+    <style name="Palm.Body" parent="">
+        <item name="android:textColor">@color/palm_muted</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:fontFamily">@font/poppinsregular</item>
+    </style>
+
+    <style name="Palm.Link" parent="">
+        <item name="android:textColor">@color/palm_gold_dark</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:fontFamily">@font/poppinsbold</item>
+        <item name="android:padding">4dp</item>
+    </style>
+
+    <!-- Input -->
+    <style name="Palm.Input" parent="">
+        <item name="android:background">@drawable/bg_input</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="android:textColor">@color/palm_ink</item>
+        <item name="android:textColorHint">@color/palm_muted</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/poppinsregular</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <!-- Tombol -->
+    <style name="Palm.Button" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@color/palm_green</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:fontFamily">@font/poppinsbold</item>
+        <item name="cornerRadius">14dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:minHeight">56dp</item>
+    </style>
+
+    <style name="Palm.Button.Gold">
+        <item name="backgroundTint">@color/palm_gold</item>
+        <item name="android:textColor">@color/palm_green</item>
+    </style>
+
+    <style name="Palm.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:textColor">@color/palm_green</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:fontFamily">@font/poppinsbold</item>
+        <item name="cornerRadius">14dp</item>
+        <item name="strokeColor">@color/palm_green</item>
+        <item name="strokeWidth">2dp</item>
+        <item name="iconTint">@color/palm_green</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:minHeight">56dp</item>
+    </style>
+
+
+    <!-- Bottom navigation -->
+    <style name="Palm.NavLabel" parent="TextAppearance.AppCompat.Caption">
+        <item name="android:fontFamily">@font/poppinssemibold</item>
+        <item name="android:textSize">11sp</item>
+    </style>
+
+    <style name="Palm.NavIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/palm_green</item>
+    </style>
+    <!-- Foto profil bulat -->
+    <style name="Palm.CircleImage" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
 </resources>

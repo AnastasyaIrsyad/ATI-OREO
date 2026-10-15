@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -17,6 +18,17 @@ import com.example.ati_oreo.tugas_snack.SnackActivity
 // Halaman Login Palmventory (tanpa toolbar). Dibuka dari Splash Screen jika belum login
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+
+    // Setelah daftar berhasil, kembali ke Login dan email langsung terisi
+    private val registerLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                binding.etEmail.setText(result.data?.getStringExtra("email") ?: "")
+                binding.etPassword.setText("")
+                binding.etPassword.requestFocus()
+            }
+        }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -31,32 +43,39 @@ class MainActivity : AppCompatActivity() {
         // Buka SharedPreferences "user_pref"
         val sharedPref = getSharedPreferences("user_pref", MODE_PRIVATE)
 
-        // Tombol Masuk: login berhasil jika Email = Kata sandi (sesuai materi: Username = Password)
-        binding.btnMasuk.setOnClickListener {
-            val email = binding.etEmail.text.toString()
-            val sandi = binding.etPassword.text.toString()
+        // Daftar akun yang dibuat di halaman Buat Akun
+        val akunPref = getSharedPreferences("akun_pref", MODE_PRIVATE)
 
-            if (email.isNotEmpty() && email == sandi) {
-                // Simpan status login dan username
+        // Tombol Masuk: cek email + password dengan akun yang sudah didaftarkan
+        binding.btnMasuk.setOnClickListener {
+            val email = binding.etEmail.text.toString().trim().lowercase()
+            val password = binding.etPassword.text.toString().trim()
+
+            val belumAdaAkun = akunPref.all.keys.none { it.startsWith("sandi_") }
+            val sandiTersimpan = akunPref.getString("sandi_$email", null)
+
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "Email dan kata sandi wajib diisi", Toast.LENGTH_SHORT).show()
+            } else if (belumAdaAkun) {
+                tampilkanDialogGagal("Akun belum tersedia. Silakan daftar terlebih dahulu")
+            } else if (sandiTersimpan == null || sandiTersimpan != password) {
+                tampilkanDialogGagal("Email atau password yang dimasukkan salah")
+            } else {
+                // Simpan status login dan nama akun
                 val editor = sharedPref.edit()
                 editor.putBoolean("isLogin", true)
                 editor.putString("username", email)
+                editor.putString("nama", akunPref.getString("nama_$email", email))
                 editor.apply()
 
                 startActivity(Intent(this, DashboardActivity::class.java))
                 finish()
-            } else {
-                AlertDialog.Builder(this)
-                    .setTitle("Login Gagal")
-                    .setMessage("Silahkan coba lagi")
-                    .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
-                    .show()
             }
         }
 
         // Daftar -> Buat Akun
         binding.tvDaftar.setOnClickListener {
-            startActivity(Intent(this, RegisterActivity::class.java))
+            registerLauncher.launch(Intent(this, RegisterActivity::class.java))
         }
 
         binding.tvLupa.setOnClickListener {
@@ -75,5 +94,13 @@ class MainActivity : AppCompatActivity() {
         binding.btnSnack.setOnClickListener {
             startActivity(Intent(this, SnackActivity::class.java))
         }
+    }
+
+    private fun tampilkanDialogGagal(pesan: String) {
+        AlertDialog.Builder(this)
+            .setTitle("Login Gagal")
+            .setMessage(pesan)
+            .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
+            .show()
     }
 }

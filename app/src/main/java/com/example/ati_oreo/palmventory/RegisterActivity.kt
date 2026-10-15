@@ -1,5 +1,6 @@
 package com.example.ati_oreo.palmventory
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
@@ -33,17 +34,29 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         binding.btnBuatAkun.setOnClickListener {
-            val nama = binding.etNama.text.toString()
-            val email = binding.etEmail.text.toString()
-            val sandi = binding.etPassword.text.toString()
-            val ulang = binding.etKonfirmasi.text.toString()
+            val nama = binding.etNama.text.toString().trim()
+            val email = binding.etEmail.text.toString().trim().lowercase()
+            val sandi = binding.etPassword.text.toString().trim()
+            val ulang = binding.etKonfirmasi.text.toString().trim()
+            val akunPref = getSharedPreferences("akun_pref", MODE_PRIVATE)
 
             if (nama.isEmpty() || email.isEmpty() || sandi.isEmpty()) {
                 Toast.makeText(this, "Semua kolom wajib diisi", Toast.LENGTH_SHORT).show()
             } else if (sandi != ulang) {
                 Toast.makeText(this, "Konfirmasi kata sandi tidak sama", Toast.LENGTH_SHORT).show()
+            } else if (akunPref.contains("sandi_$email")) {
+                Toast.makeText(this, "Email sudah terdaftar, silakan masuk", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(this, "Akun $nama berhasil dibuat", Toast.LENGTH_SHORT).show()
+                // Simpan akun (per email) supaya bisa dipakai login di halaman Login
+                val editor = akunPref.edit()
+                editor.putString("sandi_$email", sandi)
+                editor.putString("nama_$email", nama)
+                editor.apply()
+
+                Toast.makeText(this, "Akun $nama berhasil dibuat, silakan masuk", Toast.LENGTH_SHORT).show()
+
+                // Otomatis kembali ke halaman Login dengan email yang baru didaftarkan
+                setResult(RESULT_OK, Intent().putExtra("email", email))
                 finish()
             }
         }

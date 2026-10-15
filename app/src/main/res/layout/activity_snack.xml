@@ -8,6 +8,16 @@
     android:background="#AFA08C"
     tools:context=".tugas_snack.SnackActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/palm_green"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextAppearance="@style/Palm.ToolbarTitle" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -52,11 +62,11 @@
         android:id="@+id/imageView"
         android:layout_width="256dp"
         android:layout_height="217dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:srcCompat="@drawable/flavor" />
 
     <TextView
@@ -77,11 +87,11 @@
         android:id="@+id/imageView3"
         android:layout_width="534dp"
         android:layout_height="187dp"
-        android:layout_marginTop="248dp"
+        android:layout_marginTop="192dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:srcCompat="@drawable/minus" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

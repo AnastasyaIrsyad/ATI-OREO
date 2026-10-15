@@ -34,11 +34,11 @@
             android:padding="24dp">
 
             <ImageView
-                android:layout_width="64dp"
-                android:layout_height="64dp"
+                android:layout_width="79dp"
+                android:layout_height="75dp"
                 android:layout_gravity="center_horizontal"
                 android:contentDescription="Logo Palmventory"
-                android:src="@drawable/logo_palm" />
+                android:src="@drawable/logopalm" />
 
             <TextView
                 style="@style/Palm.Label"

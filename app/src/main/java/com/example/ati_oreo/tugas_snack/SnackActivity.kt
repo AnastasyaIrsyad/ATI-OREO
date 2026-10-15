@@ -8,6 +8,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.ati_oreo.R
 import android.util.Log
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -29,12 +30,32 @@ class SnackActivity : AppCompatActivity() {
             insets
         }
 
+        // Toolbar + tombol kembali ke halaman sebelumnya (Login)
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.apply {
+            title = "Tugas Snack"
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowHomeEnabled(true)
+            setHomeAsUpIndicator(R.drawable.ic_arrow_back)
+        }
+
         binding.btnSubmit.setOnClickListener {
             val intent = Intent(this, GiziActivity::class.java)
             startActivity(intent)
             val jumlah = binding.inputNama.text
 
             Toast.makeText(this, "Wah kamu makan $jumlah oreonya:)", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    // Tombol back pada toolbar
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressedDispatcher.onBackPressed()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }

@@ -31,7 +31,6 @@
             android:name=".MainActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
-
         <activity
             android:name=".palmventory.RegisterActivity"
             android:exported="false"
@@ -50,6 +49,10 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".tugas_snack.GiziActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".palmventory.ProfilActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
     </application>

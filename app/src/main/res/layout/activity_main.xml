@@ -21,10 +21,10 @@
 
         <ImageView
             android:id="@+id/imgLogo"
-            android:layout_width="84dp"
-            android:layout_height="84dp"
+            android:layout_width="117dp"
+            android:layout_height="80dp"
             android:contentDescription="Logo Palmventory"
-            android:src="@drawable/logo_palm" />
+            android:src="@drawable/logopalm" />
 
         <TextView
             android:layout_width="wrap_content"

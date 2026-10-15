@@ -8,6 +8,17 @@
     android:background="#D9D0C5"
     tools:context=".tugas_snack.GiziActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/palm_green"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextAppearance="@style/Palm.ToolbarTitle" />
+
+
     <TextView
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
@@ -176,40 +187,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="472dp"
-        android:layout_height="408dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/chocolate" />
-
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="224dp"
+        android:layout_width="385dp"
+        android:layout_height="108dp"
+        android:layout_marginTop="220dp"
         android:fontFamily="@font/chewy"
         android:text="-- OREO --"
         android:textColor="#311F07"
         android:textSize="70sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.384"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView2" />
+        app:layout_constraintTop_toTopOf="@+id/toolbar" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="278dp"
         android:layout_height="39dp"
-        android:layout_marginTop="104dp"
+        android:layout_marginTop="12dp"
         android:fontFamily="@font/chewy"
         android:text="Biskuit sandwich cokelat dengan krim vanila"
         android:textColor="#311F07"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.338"
+        app:layout_constraintHorizontal_bias="0.248"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -244,11 +246,22 @@
         android:id="@+id/imageView6"
         android:layout_width="58dp"
         android:layout_height="73dp"
-        android:layout_marginTop="364dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.099"
+        app:layout_constraintHorizontal_bias="0.096"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView12"
+        app:srcCompat="@drawable/food" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="175dp"
+        android:layout_height="232dp"
+        android:layout_marginTop="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/food" />
+        app:srcCompat="@drawable/flavor" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
