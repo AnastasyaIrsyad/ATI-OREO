@@ -8,7 +8,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.ati_oreo.databinding.ActivitySplashScreenBinding
-import com.example.ati_oreo.palmventory.DashboardActivity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -35,7 +34,7 @@ class SplashScreenActivity : AppCompatActivity() {
             // Cek isLogin: true -> Dashboard, false -> Login (MainActivity)
             val isLogin = sharedPref.getBoolean("isLogin", false)
             val intent = if (isLogin) {
-                Intent(this@SplashScreenActivity, DashboardActivity::class.java)
+                Intent(this@SplashScreenActivity, BaseActivity::class.java)
             } else {
                 Intent(this@SplashScreenActivity, MainActivity::class.java)
             }

@@ -1,18 +1,15 @@
 package com.example.ati_oreo.palmventory
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.ati_oreo.MainActivity
 import com.example.ati_oreo.R
 import com.example.ati_oreo.databinding.ActivityProfilBinding
 
-// Halaman Profil Developer (toolbar + back ke Dashboard)
+// Halaman Profil Developer (toolbar + back)
 class ProfilActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProfilBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,28 +30,6 @@ class ProfilActivity : AppCompatActivity() {
             setDisplayShowHomeEnabled(true)
             setHomeAsUpIndicator(R.drawable.ic_arrow_back)
         }
-
-        // Tombol Keluar (logout)
-        binding.btnLogout.setOnClickListener { tampilkanDialogLogout() }
-    }
-
-    // Logout: konfirmasi AlertDialog, jika "Ya" hapus data login lalu kembali ke halaman Login
-    private fun tampilkanDialogLogout() {
-        val sharedPref = getSharedPreferences("user_pref", MODE_PRIVATE)
-        AlertDialog.Builder(this)
-            .setTitle("Logout")
-            .setMessage("Apakah Anda yakin ingin keluar?")
-            .setPositiveButton("Ya") { dialog, _ ->
-                val editor = sharedPref.edit()
-                editor.clear()
-                editor.apply()
-                dialog.dismiss()
-                val intent = Intent(this, MainActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(intent)
-            }
-            .setNegativeButton("Tidak") { dialog, _ -> dialog.dismiss() }
-            .show()
     }
 
     // Tombol back pada toolbar

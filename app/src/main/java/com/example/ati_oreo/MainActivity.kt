@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.ati_oreo.databinding.ActivityMainBinding
-import com.example.ati_oreo.palmventory.DashboardActivity
 import com.example.ati_oreo.palmventory.RegisterActivity
 import com.example.ati_oreo.palmventory.WebViewActivity
 import com.example.ati_oreo.tugas_snack.SnackActivity
@@ -68,7 +67,7 @@ class MainActivity : AppCompatActivity() {
                 editor.putString("nama", akunPref.getString("nama_$email", email))
                 editor.apply()
 
-                startActivity(Intent(this, DashboardActivity::class.java))
+                startActivity(Intent(this, BaseActivity::class.java))
                 finish()
             }
         }

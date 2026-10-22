@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Dibutuhkan untuk WebView -->
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -36,9 +35,6 @@
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".palmventory.DashboardActivity"
-            android:exported="false" />
-        <activity
             android:name=".palmventory.WebViewActivity"
             android:exported="false" />
 
@@ -53,6 +49,10 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".palmventory.ProfilActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".BaseActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
     </application>

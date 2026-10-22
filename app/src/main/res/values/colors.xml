@@ -13,4 +13,10 @@
     <color name="palm_ink">#1F3332</color>
     <color name="palm_muted">#6B7F7B</color>
     <color name="palm_gold_dark">#8A5F00</color>
+
+    <color name="palm_success">#1E6B45</color>
+    <color name="palm_success_bg">#DDF0E4</color>
+    <color name="palm_danger_bg">#FBE0E0</color>
+    <color name="palm_warning">#A8741A</color>
+    <color name="palm_warning_bg">#FFF1D0</color>
 </resources>

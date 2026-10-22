@@ -63,6 +63,7 @@
                 android:layout_gravity="center_horizontal"
                 android:text="Mobile App Developer · Palmventory" />
 
+            <!-- Kartu: Tentang Saya -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -159,6 +160,7 @@
                     android:textSize="14sp" />
             </LinearLayout>
 
+            <!-- Kartu: Sosial Media -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -239,6 +241,7 @@
                     android:textSize="14sp" />
             </LinearLayout>
 
+            <!-- Kartu: Hobi -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -266,11 +269,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppinssemibold"
-                    android:text="berenang, menulis, dan membuat sesuatu kreativitas bila sudah membayangkan proses hingga hasil akhirnya"
+                    android:text="berenang, menulis, dan membuat suatu kreativitas bila sudah membayangkan proses hingga hasil akhirnya"
                     android:textColor="@color/palm_ink"
                     android:textSize="14sp" />
             </LinearLayout>
 
+            <!-- Kartu: Kekuatan Terbesar -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -298,18 +302,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppinssemibold"
-                    android:text="dominan menggunakan otak kiri"
+                    android:text="kemauan untuk terus memahami sesuatu sampai benar-benar masuk akal buat kamu sendiri."
                     android:textColor="@color/palm_ink"
                     android:textSize="14sp" />
             </LinearLayout>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnLogout"
-                style="@style/Palm.Button.Outlined"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Keluar" />
 
             <TextView
                 style="@style/Palm.Body"
