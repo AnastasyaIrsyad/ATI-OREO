@@ -77,6 +77,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
+                android:text="Username" />
+
+            <EditText
+                android:id="@+id/etUsername"
+                style="@style/Palm.Input"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="6dp"
+                android:hint="Tanpa spasi"
+                android:inputType="text" />
+            <TextView
+                style="@style/Palm.Label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
                 android:text="Kata sandi" />
 
             <EditText
@@ -86,22 +101,6 @@
                 android:layout_height="52dp"
                 android:layout_marginTop="6dp"
                 android:hint="Min. 6 karakter"
-                android:inputType="textPassword" />
-
-            <TextView
-                style="@style/Palm.Label"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:text="Konfirmasi kata sandi" />
-
-            <EditText
-                android:id="@+id/etKonfirmasi"
-                style="@style/Palm.Input"
-                android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:layout_marginTop="6dp"
-                android:hint="Ulangi kata sandi"
                 android:inputType="textPassword" />
 
             <Button

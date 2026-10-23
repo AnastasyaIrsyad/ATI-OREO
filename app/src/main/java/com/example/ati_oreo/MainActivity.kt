@@ -4,29 +4,19 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.ati_oreo.databinding.ActivityMainBinding
+import com.example.ati_oreo.palmventory.EmailActivity
 import com.example.ati_oreo.palmventory.RegisterActivity
 import com.example.ati_oreo.palmventory.WebViewActivity
 import com.example.ati_oreo.tugas_snack.SnackActivity
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 // Halaman Login Palmventory (tanpa toolbar). Dibuka dari Splash Screen jika belum login
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-
-    // Setelah daftar berhasil, kembali ke Login dan email langsung terisi
-    private val registerLauncher =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == RESULT_OK) {
-                binding.etEmail.setText(result.data?.getStringExtra("email") ?: "")
-                binding.etPassword.setText("")
-                binding.etPassword.requestFocus()
-            }
-        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,49 +29,59 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        // Buka SharedPreferences "user_pref"
+        // SharedPreferences status login
         val sharedPref = getSharedPreferences("user_pref", MODE_PRIVATE)
-
-        // Daftar akun yang dibuat di halaman Buat Akun
+        // SharedPreferences data registrasi
         val akunPref = getSharedPreferences("akun_pref", MODE_PRIVATE)
 
-        // Tombol Masuk: cek email + password dengan akun yang sudah didaftarkan
         binding.btnMasuk.setOnClickListener {
-            val email = binding.etEmail.text.toString().trim().lowercase()
-            val password = binding.etPassword.text.toString().trim()
+            val username = binding.etUsername.text.toString()
+            val password = binding.etPassword.text.toString()
 
-            val belumAdaAkun = akunPref.all.keys.none { it.startsWith("sandi_") }
-            val sandiTersimpan = akunPref.getString("sandi_$email", null)
+            // Kondisi 1: username == password
+            val kondisi1 = username.isNotEmpty() && username == password
 
-            if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Email dan kata sandi wajib diisi", Toast.LENGTH_SHORT).show()
-            } else if (belumAdaAkun) {
-                tampilkanDialogGagal("Akun belum tersedia. Silakan daftar terlebih dahulu")
-            } else if (sandiTersimpan == null || sandiTersimpan != password) {
-                tampilkanDialogGagal("Email atau password yang dimasukkan salah")
-            } else {
-                // Simpan status login dan nama akun
+            // Kondisi 2: username dan password sesuai data registrasi yang tersimpan
+            val usernameTersimpan = akunPref.getString("username", null)
+            val passwordTersimpan = akunPref.getString("password", null)
+            val kondisi2 = usernameTersimpan != null &&
+                    username == usernameTersimpan &&
+                    password == passwordTersimpan
+
+            if (kondisi1 || kondisi2) {
+                // Login berhasil: simpan status login
+                val nama = if (kondisi2) akunPref.getString("nama", username) else username
                 val editor = sharedPref.edit()
                 editor.putBoolean("isLogin", true)
-                editor.putString("username", email)
-                editor.putString("nama", akunPref.getString("nama_$email", email))
+                editor.putString("username", username)
+                editor.putString("nama", nama)
                 editor.apply()
 
                 startActivity(Intent(this, BaseActivity::class.java))
                 finish()
+                MaterialAlertDialogBuilder(this)
+                    .setTitle("Login Gagal")
+                    .setMessage("Username atau password salah")
+                    .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
+                    .show()
             }
         }
 
         // Daftar -> Buat Akun
         binding.tvDaftar.setOnClickListener {
-            registerLauncher.launch(Intent(this, RegisterActivity::class.java))
+            startActivity(Intent(this, RegisterActivity::class.java))
+        }
+
+        // Register With Gmail -> halaman input email
+        binding.btnRegisterGmail.setOnClickListener {
+            startActivity(Intent(this, EmailActivity::class.java))
         }
 
         binding.tvLupa.setOnClickListener {
             Toast.makeText(this, "Fitur lupa kata sandi belum tersedia", Toast.LENGTH_SHORT).show()
         }
 
-        // Tombol baru: Web Palmventory
+        // Tombol Web Palmventory
         binding.btnWebPalm.setOnClickListener {
             val intent = Intent(this, WebViewActivity::class.java)
             intent.putExtra("judul", "Web Palmventory")
@@ -93,13 +93,5 @@ class MainActivity : AppCompatActivity() {
         binding.btnSnack.setOnClickListener {
             startActivity(Intent(this, SnackActivity::class.java))
         }
-    }
-
-    private fun tampilkanDialogGagal(pesan: String) {
-        AlertDialog.Builder(this)
-            .setTitle("Login Gagal")
-            .setMessage(pesan)
-            .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
-            .show()
     }
 }

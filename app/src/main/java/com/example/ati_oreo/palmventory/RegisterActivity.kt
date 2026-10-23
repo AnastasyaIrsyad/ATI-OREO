@@ -3,13 +3,13 @@ package com.example.ati_oreo.palmventory
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.ati_oreo.R
 import com.example.ati_oreo.databinding.ActivityRegisterBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 // Halaman Buat Akun (toolbar + back ke Login)
 class RegisterActivity : AppCompatActivity() {
@@ -33,35 +33,53 @@ class RegisterActivity : AppCompatActivity() {
             setHomeAsUpIndicator(R.drawable.ic_arrow_back)
         }
 
+        // Email dari Register With Gmail: terisi otomatis dan tidak bisa diubah
+        val emailGmail = intent.getStringExtra("email")
+        if (emailGmail != null) {
+            binding.etEmail.setText(emailGmail)
+            binding.etEmail.isEnabled = false
+        }
+
         binding.btnBuatAkun.setOnClickListener {
             val nama = binding.etNama.text.toString().trim()
-            val email = binding.etEmail.text.toString().trim().lowercase()
-            val sandi = binding.etPassword.text.toString().trim()
-            val ulang = binding.etKonfirmasi.text.toString().trim()
-            val akunPref = getSharedPreferences("akun_pref", MODE_PRIVATE)
+            val email = binding.etEmail.text.toString().trim()
+            val username = binding.etUsername.text.toString()
+            val password = binding.etPassword.text.toString()
 
-            if (nama.isEmpty() || email.isEmpty() || sandi.isEmpty()) {
-                Toast.makeText(this, "Semua kolom wajib diisi", Toast.LENGTH_SHORT).show()
-            } else if (sandi != ulang) {
-                Toast.makeText(this, "Konfirmasi kata sandi tidak sama", Toast.LENGTH_SHORT).show()
-            } else if (akunPref.contains("sandi_$email")) {
-                Toast.makeText(this, "Email sudah terdaftar, silakan masuk", Toast.LENGTH_SHORT).show()
+            // Validasi
+            if (nama.isEmpty() || email.isEmpty() || username.isEmpty() || password.isEmpty()) {
+                tampilkanError("Semua field wajib diisi")
+            } else if (password.length < 6) {
+                tampilkanError("Password minimal 6 karakter")
+            } else if (username.contains(" ")) {
+                tampilkanError("Username tidak boleh mengandung spasi")
             } else {
-                // Simpan akun (per email) supaya bisa dipakai login di halaman Login
+                // Lolos validasi: simpan seluruh data registrasi ke SharedPreferences
+                val akunPref = getSharedPreferences("akun_pref", MODE_PRIVATE)
                 val editor = akunPref.edit()
-                editor.putString("sandi_$email", sandi)
-                editor.putString("nama_$email", nama)
+                editor.putString("nama", nama)
+                editor.putString("email", email)
+                editor.putString("username", username)
+                editor.putString("password", password)
                 editor.apply()
 
-                Toast.makeText(this, "Akun $nama berhasil dibuat, silakan masuk", Toast.LENGTH_SHORT).show()
-
-                // Otomatis kembali ke halaman Login dengan email yang baru didaftarkan
-                setResult(RESULT_OK, Intent().putExtra("email", email))
+                // Tampilkan halaman informasi "Registrasi Berhasil"
+                val intent = Intent(this, RegistrasiBerhasilActivity::class.java)
+                intent.putExtra("nama", nama)
+                startActivity(intent)
                 finish()
             }
         }
 
         binding.tvMasuk.setOnClickListener { finish() }
+    }
+
+    private fun tampilkanError(pesan: String) {
+        MaterialAlertDialogBuilder(this)
+            .setTitle("Registrasi Gagal")
+            .setMessage(pesan)
+            .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
+            .show()
     }
 
     // Tombol back pada toolbar
