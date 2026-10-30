@@ -239,6 +239,30 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="6dp"
                     android:fontFamily="@font/poppinsbold"
+                    android:text="Pergerakan barang"
+                    android:textColor="@color/palm_green"
+                    android:textSize="14sp" />
+
+                <com.dewakoding.androidchartjs.AndroidChartJSView
+                    android:id="@+id/androidChart1"
+                    android:layout_width="match_parent"
+                    android:layout_height="280dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="6dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_card"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
+                    android:fontFamily="@font/poppinsbold"
                     android:text="Stok menipis"
                     android:textColor="@color/palm_green"
                     android:textSize="14sp" />

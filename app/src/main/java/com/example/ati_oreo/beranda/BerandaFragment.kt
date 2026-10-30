@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.dewakoding.androidchartjs.util.ChartType
 import com.example.ati_oreo.R
 import com.example.ati_oreo.databinding.FragmentBerandaBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -42,6 +43,24 @@ class BerandaFragment : Fragment() {
             requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav_view)
                 .selectedItemId = R.id.barang
         }
+        // ===== DATA DUMMY (satu sumber untuk kartu dan chart) =====
+        val namaBarang = listOf(
+            "Pupuk NPK 01", "Pupuk NPK 02", "Pupuk Urea",
+            "Pestisida Glamular", "Cangkul", "Palu", "Sarung Tangan"
+        )
+        val stokBarang = listOf(155, 5, 120, 4, 80, 106, 130)
+
+        // Kartu ringkasan
+        binding.tvTotalPengguna.text = namaBarang.size.toString()
+        binding.tvTotalStok.text = stokBarang.sum().toString()
+
+        // Chart
+        binding.androidChart1.setChart(
+            ChartType.PIE,
+            namaBarang.toTypedArray(),
+            stokBarang.toTypedArray(),
+            "Stok barang (unit)"
+        )
     }
 
     override fun onDestroyView() {
